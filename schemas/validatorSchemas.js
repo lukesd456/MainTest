@@ -25,4 +25,14 @@ class ValidatorTestJSON {
     }
 }
 
-module.exports = { ValidatorTest, ValidatorTestJSON }
+class clonateTestJson {
+    constructor(tipoDeTest, tests, targetURL, numero) {
+        this.tipoDeTest = tipoDeTest
+        this.targetURL = targetURL
+        this.numeroTests = numero 
+        this.tests = tests
+    }
+}
+
+
+module.exports = { ValidatorTest, ValidatorTestJSON, clonateTestJson }

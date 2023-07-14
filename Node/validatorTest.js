@@ -1,35 +1,12 @@
 const { filterSIDE } = require('../schemas/sideSchema.js')
 
 const { ValidatorTest, ValidatorTestJSON } = require('../schemas/validatorSchemas.js')
+const { generarNumeroAleatorio, generarPalabraAleatoria } = require('../utils/functions.js')
 
 const {config} = require('dotenv')
 const { writeJson } = require('./jsonWriter.js')
 
 config()
-
-const generarPalabraAleatoria = (longitud) => {
-    const alfabeto = 'abcdefghijklmnopqrstuvwxyz';
-    let palabra = '';
-  
-    for (let i = 0; i < longitud; i++) {
-      const indice = Math.floor(Math.random() * alfabeto.length);
-      const letra = alfabeto.charAt(indice);
-      palabra += letra;
-    }
-  
-    return palabra;
-}
-
-const generarNumeroAleatorio = (longitud) => {
-    let numero = '';
-    
-    for (let i = 0; i < longitud; i++) {
-      const digito = Math.floor(Math.random() * 10); // Generar un dígito aleatorio entre 0 y 9
-      numero += digito;
-    }
-    
-    return numero;
-}
 
 const path = '../SideFiles/testAcopio2.side'
 
@@ -76,7 +53,9 @@ const createValidatorTests = async (path) => {
 
     })
 
-    writeJson(new ValidatorTestJSON('Test de validaciones', tests, data.targetURL))
+    const path = '../Results/validatorTests.json'
+
+    writeJson(new ValidatorTestJSON('Test de validaciones', tests, data.targetURL), path)
 
     // console.log(data.targetURL)
 
