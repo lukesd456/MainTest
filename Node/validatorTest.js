@@ -43,36 +43,38 @@ const createValidatorTests = async (path) => {
 
     testsToDo.map((e) => {
 
+        const commands = data.commands.map(c => c)
         const index = e.index
         const longitudIndefinida = e.longitudIndefinida
         const advertencias = e.advertencias
         const tipoDeDato = e.tipoDeDato
         const obligatorio = e.obligatorio
-        const defaultValue = e.value
 
-        if (!longitudIndefinida) {
+        const arrayTests = []
 
-            tests.push(new ValidatorTest('longitud', advertencias, data.commands, index, generarNumeroAleatorio(e.longitud+10)))
+        tipoDeDato === 'numero' && arrayTests.push({
+            tipoDeTest: 'tipoDeDato',
+            value: generarPalabraAleatoria(e.longitud)
+        })
 
-        }
+        obligatorio && arrayTests.push({
+            tipoDeTest: 'obligatorio',
+            value: ''
+        })
 
-        if (tipoDeDato === 'numero') {
+        !longitudIndefinida && arrayTests.push({
+            tipoDeTest: 'longitud',
+            value: generarNumeroAleatorio(e.longitud+20)
+        })
 
-            tests.push(new ValidatorTest('tipo de dato', advertencias,data.commands, index, generarPalabraAleatoria(e.longitud)))
-        }
+        arrayTests.map((t) => {
+            const value = t.value
+            const tipoDeTest = t.tipoDeTest
 
-        if (obligatorio) {
-
-            tests.push(new ValidatorTest('obligatorio', advertencias,data.commands,index, '' ))
-        }
-
-        data.commands[index].value = defaultValue
-        // console.log(defaultValue)
-        // console.log(data.commands[index].value)
+            tests.push(new ValidatorTest(tipoDeTest, advertencias, commands, index, value))
+        })
 
     })
-
-    console.log(tests[1])
 
     writeJson(new ValidatorTestJSON('Test de validaciones', tests, data.targetURL))
 

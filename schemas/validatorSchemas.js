@@ -1,12 +1,13 @@
 class ValidatorTest {
     constructor (tipoDeTest,advertencias, commands, index, value) {
 
-        let routine = commands.map((e) => {
-            if (e.index === index) {
-                e.value = value
-            }
-
-            return e
+        let routine = commands.map((r) => {
+            if (r.index === index) {
+                return {
+                    ...r,
+                    value: value
+                }
+            } else return r            
         })
 
         this.tipoDeTest = tipoDeTest
