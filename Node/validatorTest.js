@@ -1,8 +1,9 @@
 const { filterSIDE } = require('../schemas/sideSchema.js')
 
-const { ValidatorTest } = require('../schemas/validatorSchemas.js')
+const { ValidatorTest, ValidatorTestJSON } = require('../schemas/validatorSchemas.js')
 
 const {config} = require('dotenv')
+const { writeJson } = require('./jsonWriter.js')
 
 config()
 
@@ -38,28 +39,45 @@ const createValidatorTests = async (path) => {
 
     const tests = []
 
-    data.commands.map((e) => {
+    const testsToDo = data.commands.filter(e => e.advertencias)
+
+    testsToDo.map((e) => {
 
         const index = e.index
+        const longitudIndefinida = e.longitudIndefinida
         const advertencias = e.advertencias
+        const tipoDeDato = e.tipoDeDato
+        const obligatorio = e.obligatorio
+        const defaultValue = e.value
 
-        if (e.command == 'type' &&  advertencias) {
+        if (!longitudIndefinida) {
 
-            const longitud = e.longitud
-            
-            const values = []
-
-            if (e.obligatorio) {
-                values.push('')
-            }
-
-            if (e.longitudIndefinida) {
-
-            }
+            tests.push(new ValidatorTest('longitud', advertencias, data.commands, index, generarNumeroAleatorio(e.longitud+10)))
 
         }
 
+        if (tipoDeDato === 'numero') {
+
+            tests.push(new ValidatorTest('tipo de dato', advertencias,data.commands, index, generarPalabraAleatoria(e.longitud)))
+        }
+
+        if (obligatorio) {
+
+            tests.push(new ValidatorTest('obligatorio', advertencias,data.commands,index, '' ))
+        }
+
+        data.commands[index].value = defaultValue
+        // console.log(defaultValue)
+        // console.log(data.commands[index].value)
+
     })
+
+    console.log(tests[1])
+
+    writeJson(new ValidatorTestJSON('Test de validaciones', tests, data.targetURL))
+
+    // console.log(data.targetURL)
+
 }
 
 createValidatorTests(path)

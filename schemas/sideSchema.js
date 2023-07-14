@@ -5,17 +5,15 @@ config()
 
 const DEFAULT_LONGITUD = parseInt(process.env.DEFAULT_LONGITUD)
 
-const generarPalabraAleatoria = (longitud) => {
-    const alfabeto = 'abcdefghijklmnopqrstuvwxyz';
-    let palabra = '';
-  
+const generarNumeroAleatorio = (longitud) => {
+    let numero = '';
+    
     for (let i = 0; i < longitud; i++) {
-      const indice = Math.floor(Math.random() * alfabeto.length);
-      const letra = alfabeto.charAt(indice);
-      palabra += letra;
+      const digito = Math.floor(Math.random() * 10); // Generar un dígito aleatorio entre 0 y 9
+      numero += digito;
     }
-  
-    return palabra;
+    
+    return numero;
 }
 
 class ActionSchema {
@@ -83,7 +81,7 @@ class ActionSchema {
 
             this.unico = unico ? true : false
 
-            if (unico) {this.value = generarPalabraAleatoria(longitud)}
+            if (unico) {this.value = generarNumeroAleatorio(longitud)}
 
             //Almacenamos las instancias
             if (longitud) {this.longitud = longitud}
@@ -108,8 +106,8 @@ class ActionSchema {
         let xpathObjective
 
         const typeXPATH = [
-            'position',
             'idRelative',
+            'position',
             'attributes',
             'innerText'
         ]
@@ -138,7 +136,7 @@ class ActionSchema {
         } else {
             this.target = {
                 location: xpathObjective[0],
-                detail: xpathObjective[1]
+                detail: 'xpath'
             }
         }
     }

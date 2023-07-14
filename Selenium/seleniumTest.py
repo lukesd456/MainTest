@@ -17,18 +17,16 @@ class Navigator(webdriver.Remote, By):
     def initialArguments(self, url:str, test):
 
         self.targetURL:str = url
-        # self.rutinaNormal:list = JSON["rutinaNormal"]
         self.test = test
         self.sucesos:list = []
 
-    def registrarSuceso(self, tipoDeTest:str, indice:int, mensajeEsperado:list, action:dict, rutina:list):
+    def registrarSuceso(self, tipoDeTest:str, indice:int, advertencias:list, action:dict):
 
         reporte = {
             "tipoDeTest" : tipoDeTest,
             "indice" : indice,
-            "mensajeEsperado" : mensajeEsperado,
-            "action" : action,
-            "rutina" : rutina
+            "advertencias" : advertencias,
+            "action" : action
         }
 
         self.sucesos.append(reporte)
@@ -43,85 +41,72 @@ class Navigator(webdriver.Remote, By):
         self.element = self.find_element(by=self.CSS_SELECTOR, 
         value=location)
 
-    def clickAction(self, validador:bool, mensajesEsperados:list):
+    def filterSelector(self, target):
+        location = target["location"]
+        detail = target["detail"]
 
-        self.element.click()
+        match detail:
+            case 'css':
+                self.selectElementByCssSelector(location)
+            case 'xpath':
+                self.selectElementByXPATH(location)
+
+    def initSession(self):
+        
+        self.get(self.targetURL)
+        self.set_window_size(1500,1000)
+
+    def validateClick(self, validador:bool, advertencias:list):
 
         if validador:
-
             print('validando')
 
             pagesource:str = self.page_source
             errorEncontrado:bool = False
 
-            #Si lo encuentra alguna vez, entonces cambiara su valor a falso
-            for m in mensajesEsperados:
-                if m in pagesource:
-                    print('encontrado')
+            for a in advertencias:
+
+                if a in pagesource:
                     errorEncontrado = True
-
-            #Si el errorEcontrado no ha cambiado su estado, entonces se toma como un suceso registrado; en caso si haya cambiado, no se registra, se detiene la ejecucion
+                    break
+            
             if errorEncontrado:
-                raise TimeoutException
-            else:
+                print('validacion cumplida')
                 raise AssertionError
-                
+            else:
+                print('error')
+                raise AssertionError
 
-    def initSession(self):
-        
-        self.get(self.targetURL)
-
-        self.set_window_size(height=1000, width=1300)
-        print('sesion iniciada')
-
-    #Ejecutar esto para cada test que se encuentre en el array
-    def executeRoutine(self):
-
-        t = self.test
+    def executeValidatorRoutine(self):
 
         self.initSession()
 
-        indice:int = int(t["indice"])
-        tipoDeTest:str = t["tipoDeTest"]
+        #Instancias de ValidatorTest -> validatorSchemas.js
+        advertencias = self.test["advertencias"]
+        commands = self.test["commands"]
+        tipoDeTest = self.test["tipoDeTest"]
+        index = self.test["index"]
 
-        print(tipoDeTest)
+        for c in commands:
 
-        mensajesEsperados:list = copy.deepcopy(t["mensajesEsperados"])
-        rutina:list = t["rutina"]
+            command = c["command"]
+            target = c["target"]
 
-        if len(mensajesEsperados) != 0:
+            self.filterSelector(target)
 
-            for action in rutina:
+            if command == 'click':
+                    
+                    validador = c["validador"]
+                    self.element.click()
 
-                action:dict
-                
-                command:str = action["command"]
-
-                target:str = action["target"]["location"]
-                typeTarget:str = action["target"]["detail"]
-
-                value:str = action["value"]
-                validador:bool = action["validador"]
-
-                #Seleccionar elemento:
-                if typeTarget != 'css':
-                    self.selectElementByXPATH(target)
-                else:
-                    self.selectElementByCssSelector(target)
-
-                #Realizar accion:
-                match command:
-                    case 'type':
-                        self.element.send_keys(value)
-                    case 'click':
-                        try:
-                            self.clickAction(validador, mensajesEsperados)
-                        except TimeoutException:
-                            print('Test Inverso Exitoso')
-                            break
-                        except AssertionError:
-                            self.registrarSuceso(tipoDeTest, indice, mensajesEsperados, action, rutina)
-                            print('suceso registrado')
-                            break
+                    try:
+                        self.validateClick(validador, advertencias)
+                    except AssertionError:
+                        break
+                    
+            else:
+                value = c["value"]
+                print(value)
+                self.element.send_keys(value)
 
         self.quit()
