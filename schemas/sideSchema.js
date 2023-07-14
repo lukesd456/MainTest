@@ -1,8 +1,9 @@
 const { readFile } = require('fs/promises')
 const {config} = require('dotenv')
-const { v4 : uuidV4 } = require('uuid')
 
 config()
+
+const DEFAULT_LONGITUD = parseInt(process.env.DEFAULT_LONGITUD)
 
 const generarPalabraAleatoria = (longitud) => {
     const alfabeto = 'abcdefghijklmnopqrstuvwxyz';
@@ -25,6 +26,17 @@ class ActionSchema {
         this.value = accion.value
         this.command = accion.command
         this.target
+        
+        //Apartados Click
+        this.validador
+
+        //Apartados Type
+        this.longitudIndefinida
+        this.longitud
+        this.advertencias
+        this.obligatorio
+        this.unico
+        this.tipoDeDato
 
         //Instancias para tipo click
         if (accion.command === 'click') {
@@ -39,11 +51,24 @@ class ActionSchema {
             let longitud = mensajesEsperados.find(e => e.includes('longitud:'))
 
             if (longitud) {
-
-                const longitudDefault = parseInt(process.env.DEFAULT_LONGITUD)
-
                 longitud = longitud.split(':')[1]
-                longitud = longitud !== 'indefinida' ? longitud : longitudDefault
+
+                this.longitudIndefinida = longitud === 'indefinida' ? true : false
+                const longitudDefault = DEFAULT_LONGITUD
+
+                longitud = longitud !== 'indefinida' ? parseInt(longitud) : longitudDefault
+
+
+            }
+
+            //Establecer Advertencias
+            let advertencias = mensajesEsperados.find(e => e.includes('advertencias:'))
+
+            if (advertencias) {
+                advertencias = advertencias.split(':')[1].split('|')
+                this.advertencias = advertencias
+            } else {
+                this.advertencias = false
             }
 
             //Establecer el tipo de dato
@@ -58,7 +83,7 @@ class ActionSchema {
 
             this.unico = unico ? true : false
 
-            if (unico) {this.value = toString(uuidV4())}
+            if (unico) {this.value = generarPalabraAleatoria(longitud)}
 
             //Almacenamos las instancias
             if (longitud) {this.longitud = longitud}
@@ -140,16 +165,12 @@ class SideSchema {
     }
 }
 
-const filterSIDE = async () => {
-    let file = await readFile('../SideFiles/testAcopio2.side', 'utf-8')
+const filterSIDE = async (path) => {
+    let file = await readFile(path, 'utf-8')
 
     file = new SideSchema(JSON.parse(file))
 
-    console.log(file)
-
-    // return file
+    return file
 }
 
-
-filterSIDE()
-// module.exports = filterSIDE
+module.exports = { filterSIDE }
