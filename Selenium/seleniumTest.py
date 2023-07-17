@@ -56,6 +56,39 @@ class Navigator(webdriver.Remote, By):
         self.get(self.targetURL)
         self.set_window_size(1500,1000)
 
+    def typeElement(self, content:str):
+        self.element.send_keys(content)
+
+    def clickElement(self):
+        self.element.click()
+
+    def executeDefaultRoutine(self):
+        self.initSession()
+
+        commands = self.test["commands"]
+
+        for c in commands:
+
+            command = c["command"]
+            target = c["target"]            
+            index = c["index"]
+
+            print(index)
+
+            try:
+                self.filterSelector(target)
+            except TimeoutException:
+                print('no carga el elemento')
+                break
+
+            if command == 'type':
+                value:str = c["value"]
+                self.typeElement(value)
+            else:
+                self.clickElement()
+
+        self.quit()
+
     def validateClick(self, validador:bool, advertencias:list):
 
         if validador:

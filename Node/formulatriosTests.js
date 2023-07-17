@@ -22,16 +22,16 @@ const filterValues = (longitud, tipoDeDato, comando, valorDefault) => {
 }
 
 let modulesRoutes = [
-    'formularios_altitud.side',
-    'formularios_audio.side',
     'formularios_descripcion.side',
-    'formularios_fecha.side',
-    'formularios_firma.side',
-    'formularios_fotografia.side',
     'formularios_numeros.side',
-    'formularios_poligono.side',
     'formularios_texto.side',
-    'formularios_ubicacion.side'
+    'formularios_fecha.side',
+    'formularios_fotografia.side',
+    'formularios_firma.side',
+    'formularios_audio.side',
+    'formularios_ubicacion.side',
+    'formularios_poligono.side',
+    'formularios_altitud.side',
 ]
 
 modulesRoutes = modulesRoutes.map(e => '../SideFiles/'+e)
@@ -77,26 +77,26 @@ const createTestsFormularios = async (numeroDeModulos, numeroDeOpciones) => {
 
     //Agregar opciones a test de Opciones Unicas y multiples
 
-    for (let i = 0; i < numeroDeOpciones; i++) {
+    // for (let i = 0; i < numeroDeOpciones; i++) {
         
-        const dataOpcion = dataAgregarOpcion.commands
+    //     const dataOpcion = dataAgregarOpcion.commands
 
-        dataOpcion.map(e => dataOpcionesMultiples.commands.push(e))
-        dataOpcion.map(e => dataOpcionUnica.commands.push(e))
+    //     dataOpcion.map(e => dataOpcionesMultiples.commands.push(e))
+    //     dataOpcion.map(e => dataOpcionUnica.commands.push(e))
 
-    }
+    // }
 
     //Agregamos las acciones para guardar la pregunta
 
-    dataGuardarOpciones.commands.map((e) => {
-        dataOpcionesMultiples.commands.push(e)
-        dataOpcionUnica.commands.push(e)
-    })
+    // dataGuardarOpciones.commands.map((e) => {
+    //     dataOpcionesMultiples.commands.push(e)
+    //     dataOpcionUnica.commands.push(e)
+    // })
 
     //Agregamos las opciones multiples y unicas a la accion principal
 
-    dataOpcionUnica.commands.map(e => mainAction.commands.push(e))
-    dataOpcionesMultiples.commands.map(e => mainAction.commands.push(e))
+    // dataOpcionUnica.commands.map(e => mainAction.commands.push(e))
+    // dataOpcionesMultiples.commands.map(e => mainAction.commands.push(e))
 
     //Agregamos la accion de guardar formulario
 
@@ -132,4 +132,4 @@ const createTestsFormularios = async (numeroDeModulos, numeroDeOpciones) => {
 
 }
 
-createTestsFormularios(5000,5000)
+createTestsFormularios(500,1)

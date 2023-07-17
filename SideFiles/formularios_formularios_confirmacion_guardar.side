@@ -31,13 +31,12 @@
       ],
       "value": ""
     }, {
-      "id": "f84544a4-a77c-4b35-b7da-34f286069551",
+      "id": "57d30eac-5494-4e1c-8b59-874d19099941",
       "comment": "",
       "command": "click",
       "target": "css=.swal-button",
       "targets": [
         ["css=.swal-button", "css:finder"],
-        ["xpath=//div[3]/div/button", "xpath:position"],
         ["xpath=//button[contains(.,'OK')]", "xpath:innerText"]
       ],
       "value": ""

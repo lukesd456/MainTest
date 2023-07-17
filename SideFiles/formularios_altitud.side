@@ -7,15 +7,6 @@
     "id": "cd695b80-6aff-4d46-8c34-bbe7dc1dd679",
     "name": "TEST",
     "commands": [{
-      "id": "ee194602-5efd-425b-9ebb-27bfa0600dd8",
-      "comment": "",
-      "command": "click",
-      "target": "css=.MuiButtonBase-root:nth-child(4) > .MuiSvgIcon-root",
-      "targets": [
-        ["css=.MuiButtonBase-root:nth-child(4) > .MuiSvgIcon-root", "css:finder"]
-      ],
-      "value": ""
-    }, {
       "id": "84005839-73ae-4621-8f09-dca250ad8e0a",
       "comment": "",
       "command": "click",
@@ -48,7 +39,7 @@
       "target": "xpath=//div[@id='category']",
       "targets": [
         ["css=body", "css:finder"],
-        ["xpath=//body", "xpath:position"]
+        ["xpath=//div[@id='category']", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -109,7 +100,6 @@
       "target": "css=.swal-button",
       "targets": [
         ["css=.swal-button", "css:finder"],
-        ["xpath=//div[4]/div/div[3]/div/button", "xpath:position"],
         ["xpath=//button[contains(.,'OK')]", "xpath:innerText"]
       ],
       "value": ""

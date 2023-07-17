@@ -39,7 +39,7 @@
       "target": "xpath=//div[@id='category']",
       "targets": [
         ["css=body", "css:finder"],
-        ["xpath=//body", "xpath:position"]
+        ["xpath=//div[@id='category']", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -94,13 +94,12 @@
       ],
       "value": ""
     }, {
-      "id": "6930d2bc-e22c-49ff-b4bf-ab0d5367a62e",
+      "id": "57d30eac-5494-4e1c-8b59-874d19099941",
       "comment": "",
       "command": "click",
       "target": "css=.swal-button",
       "targets": [
         ["css=.swal-button", "css:finder"],
-        ["xpath=//div[4]/div/div[3]/div/button", "xpath:position"],
         ["xpath=//button[contains(.,'OK')]", "xpath:innerText"]
       ],
       "value": ""

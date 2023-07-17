@@ -7,17 +7,6 @@
     "id": "cd695b80-6aff-4d46-8c34-bbe7dc1dd679",
     "name": "TEST",
     "commands": [{
-      "id": "e31010d2-13b9-43fe-a2f5-dadea8ce3cb5",
-      "comment": "",
-      "command": "click",
-      "target": "css=.MuiTabScrollButton-root:nth-child(4)",
-      "targets": [
-        ["css=.MuiTabScrollButton-root:nth-child(4)", "css:finder"],
-        ["xpath=//div[@id='root']/main/div/div[2]/div/div[3]/div/div[4]", "xpath:idRelative"],
-        ["xpath=//div[4]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
       "id": "fbf3ce30-d059-4083-a934-85ad208d68ce",
       "comment": "",
       "command": "click",
@@ -50,7 +39,7 @@
       "target": "xpath=//div[@id='category']",
       "targets": [
         ["css=body", "css:finder"],
-        ["xpath=//body", "xpath:position"]
+        ["xpath=//div[@id='category']", "xpath:position"]
       ],
       "value": ""
     }, {

@@ -104,7 +104,7 @@
       "target": "xpath=//div[@id='form_type']",
       "targets": [
         ["css=body", "css:finder"],
-        ["xpath=//body", "xpath:position"]
+        ["xpath=//div[@id='form_type']", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -126,7 +126,7 @@
       "target": "xpath=//div[@id='category']",
       "targets": [
         ["css=body", "css:finder"],
-        ["xpath=//body", "xpath:position"]
+        ["xpath=//div[@id='category']", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -148,7 +148,7 @@
       "target": "xpath=//div[@id='entry_entity_type']",
       "targets": [
         ["css=body", "css:finder"],
-        ["xpath=//body", "xpath:position"]
+        ["xpath=//div[@id='entry_entity_type']", "xpath:position"]
       ],
       "value": ""
     }, {

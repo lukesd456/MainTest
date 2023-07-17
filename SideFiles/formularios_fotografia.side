@@ -62,7 +62,7 @@
       "target": "xpath=//div[@id='category']",
       "targets": [
         ["css=body", "css:finder"],
-        ["xpath=//body", "xpath:position"]
+        ["xpath=//div[@id='category']", "xpath:position"]
       ],
       "value": ""
     }, {
@@ -123,7 +123,6 @@
       "target": "css=.swal-button",
       "targets": [
         ["css=.swal-button", "css:finder"],
-        ["xpath=//div[4]/div/div[3]/div/button", "xpath:position"],
         ["xpath=//button[contains(.,'OK')]", "xpath:innerText"]
       ],
       "value": ""
