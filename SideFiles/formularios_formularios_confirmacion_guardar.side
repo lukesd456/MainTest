@@ -1,0 +1,56 @@
+{
+  "id": "8561b6e3-a81a-4e85-a4ea-c386ecca2c99",
+  "version": "2.0",
+  "name": "assda",
+  "url": "https://id-panel-stage.agros.tech",
+  "tests": [{
+    "id": "e32ca155-0f0f-4620-aff7-3bf519e5849e",
+    "name": "f",
+    "commands": [{
+      "id": "515d19ba-fd6a-4648-9404-2f24831e6c3c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.css-1ufyszc",
+      "targets": [
+        ["css=.css-1ufyszc", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div/div[2]/div/div[2]/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e902cfb9-faa2-48cc-8b2b-5b62647a9210",
+      "comment": "",
+      "command": "click",
+      "target": "css=.css-vswc2n",
+      "targets": [
+        ["css=.css-vswc2n", "css:finder"],
+        ["xpath=(//button[@type='button'])[19]", "xpath:attributes"],
+        ["xpath=//div[3]/div[2]/div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar formulario')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f84544a4-a77c-4b35-b7da-34f286069551",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal-button",
+      "targets": [
+        ["css=.swal-button", "css:finder"],
+        ["xpath=//div[3]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'OK')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e2ca9d5c-04eb-459b-b42d-6420959fbbe0",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["e32ca155-0f0f-4620-aff7-3bf519e5849e"]
+  }],
+  "urls": ["https://id-panel-stage.agros.tech/"],
+  "plugins": []
+}

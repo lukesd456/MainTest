@@ -1,0 +1,47 @@
+{
+  "id": "9d6376ab-a742-4e4d-8670-a28fc010cb94",
+  "version": "2.0",
+  "name": "testprincipal",
+  "url": "https://id-panel-stage.agros.tech",
+  "tests": [{
+    "id": "cd695b80-6aff-4d46-8c34-bbe7dc1dd679",
+    "name": "TEST",
+    "commands": [{
+      "id": "86508367-14ac-4170-9efd-2fbc745d765d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.jss35:nth-child(2) > .css-vswc2n",
+      "targets": [
+        ["css=.jss35:nth-child(2) > .css-vswc2n", "css:finder"],
+        ["xpath=(//button[@type='button'])[18]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div/div[2]/div/div[4]/div/div[2]/div/div/div[5]/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "58380b54-9406-497d-8255-7bf4ff2f52bc",
+      "comment": "string",
+      "command": "type",
+      "target": "id=value",
+      "targets": [
+        ["id=value", "id"],
+        ["name=value", "name"],
+        ["css=#value", "css:finder"],
+        ["xpath=//input[@id='value']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/main/div/div[2]/div/div[4]/div/div[2]/div/div/div[5]/div/div[2]/table/tbody/tr/td/div/div/input", "xpath:idRelative"],
+        ["xpath=//td/div/div/input", "xpath:position"]
+      ],
+      "value": "Valor"
+    }]
+  }],
+  "suites": [{
+    "id": "2ab09faf-7def-4027-a03e-65a19f275389",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["cd695b80-6aff-4d46-8c34-bbe7dc1dd679"]
+  }],
+  "urls": ["https://id-panel-stage.agros.tech/"],
+  "plugins": []
+}

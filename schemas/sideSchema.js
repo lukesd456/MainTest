@@ -1,5 +1,5 @@
 const { readFile } = require('fs/promises')
-const {config} = require('dotenv')
+const { config } = require('dotenv')
 const { generarNumeroAleatorio } = require('../utils/functions.js')
 
 config()
@@ -7,14 +7,14 @@ config()
 const DEFAULT_LONGITUD = parseInt(process.env.DEFAULT_LONGITUD)
 
 class ActionSchema {
-    constructor (accion, index) {
+    constructor(accion, index) {
 
         //Instancias del objeto
         this.index = index
         this.value = accion.value
         this.command = accion.command
         this.target
-        
+
         //Apartados Click
         this.validador
 
@@ -61,22 +61,22 @@ class ActionSchema {
 
             //Establecer el tipo de dato
             let tipoDeDato = mensajesEsperados.find(e => e.includes('numero') | e.includes('string'))
-            
+
             //Establecer si es obligatorio
             let obligatorio = mensajesEsperados.find(e => e.includes('obligatorio'))
             obligatorio = obligatorio ? true : false
 
-            //Si el apartado es unido, entonces generamos un valor unico para ese valor
-            let unico = mensajesEsperados.find(e=>e.includes('unico'))
+            //Si el apartado es unico, entonces generamos un valor unico para ese valor
+            let unico = mensajesEsperados.find(e => e.includes('unico'))
 
             this.unico = unico ? true : false
 
-            if (unico) {this.value = generarNumeroAleatorio(longitud)}
+            if (unico) { this.value = generarNumeroAleatorio(longitud) }
 
             //Almacenamos las instancias
-            if (longitud) {this.longitud = longitud}
-            if (tipoDeDato) {this.tipoDeDato = tipoDeDato}
-            if (obligatorio) {this.obligatorio = obligatorio}
+            if (longitud) { this.longitud = longitud }
+            if (tipoDeDato) { this.tipoDeDato = tipoDeDato }
+            if (obligatorio) { this.obligatorio = obligatorio }
         }
 
         //Instancias generales
@@ -133,7 +133,7 @@ class ActionSchema {
 }
 
 class SideSchema {
-    constructor (JSON) {
+    constructor(JSON) {
 
         //Filtramos las acciones
         let commands = JSON.tests[0].commands
@@ -144,9 +144,9 @@ class SideSchema {
         //Filtramos las acciones
         commands = commands.map((e) => {
             const index = commands.indexOf(e)
-            return new ActionSchema(e,index)
+            return new ActionSchema(e, index)
         })
-        
+
         //Establecemos las instancias
         this.targetURL = JSON.url
         this.commands = commands

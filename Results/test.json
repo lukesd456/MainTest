@@ -1,0 +1,166 @@
+{
+    "targetURL": "https://id-panel-stage.agros.tech",
+    "commands": [
+        {
+            "index": 0,
+            "value": "qa_user",
+            "command": "type",
+            "advertencias": false,
+            "unico": false,
+            "target": {
+                "location": "//div[@id='root']/main/div/div[2]/div/div/form/div/div/div/input",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 1,
+            "value": "agROS_2023",
+            "command": "type",
+            "advertencias": false,
+            "unico": false,
+            "target": {
+                "location": "//div[@id='root']/main/div/div[2]/div/div/form/div[2]/div/div/input",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 2,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[@id='root']/main/div/div[2]/div/div/div[2]/div/button",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 3,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[@id='root']/main/div/div/div/div/div/div/div/div[2]/div/div/div/div[3]/ul[3]/a/div/span",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 4,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[@id='root']/main/div/div[2]/div/div/div/div/div/div[2]/div/div/button",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 5,
+            "value": "testqaA",
+            "command": "type",
+            "longitudIndefinida": true,
+            "advertencias": false,
+            "unico": false,
+            "longitud": 30,
+            "tipoDeDato": "string",
+            "obligatorio": true,
+            "target": {
+                "location": "//div[3]/div/div/div/div/div/div/input",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 6,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//body",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 7,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[@id='menu-form_type']/div[3]/ul/li",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 8,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//body",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 9,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[@id='menu-category']/div[3]/ul/li[2]",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 10,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//body",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 11,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[@id='menu-entry_entity_type']/div[3]/ul/li",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 12,
+            "value": "testqaA",
+            "command": "type",
+            "longitudIndefinida": true,
+            "advertencias": false,
+            "unico": false,
+            "longitud": 30,
+            "tipoDeDato": "string",
+            "target": {
+                "location": "//textarea",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 13,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[3]/div/div[2]/div[2]/button",
+                "detail": "xpath"
+            }
+        },
+        {
+            "index": 14,
+            "value": "",
+            "command": "click",
+            "validador": false,
+            "target": {
+                "location": "//div[2]/div/div[3]/div/button",
+                "detail": "xpath"
+            }
+        }
+    ]
+}

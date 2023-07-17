@@ -1,8 +1,8 @@
-const {readFile, writeFile} = require('fs/promises')
-const { v4:uuidV4 } = require('uuid')
+const { readFile, writeFile } = require('fs/promises')
+const { v4: uuidV4 } = require('uuid')
 
 class FilterSide {
-    constructor (json) {
+    constructor(json) {
         this.url = json.url;
         this.commands = json.tests[0].commands
     }
@@ -11,24 +11,24 @@ class FilterSide {
 const generarPalabraAleatoria = (longitud) => {
     const alfabeto = 'abcdefghijklmnopqrstuvwxyz';
     let palabra = '';
-  
+
     for (let i = 0; i < longitud; i++) {
-      const indice = Math.floor(Math.random() * alfabeto.length);
-      const letra = alfabeto.charAt(indice);
-      palabra += letra;
+        const indice = Math.floor(Math.random() * alfabeto.length);
+        const letra = alfabeto.charAt(indice);
+        palabra += letra;
     }
-  
+
     return palabra;
 }
 
 const generarNumeroAleatorio = (longitud) => {
     let numero = '';
-    
+
     for (let i = 0; i < longitud; i++) {
-      const digito = Math.floor(Math.random() * 10); // Generar un dígito aleatorio entre 0 y 9
-      numero += digito;
+        const digito = Math.floor(Math.random() * 10); // Generar un dígito aleatorio entre 0 y 9
+        numero += digito;
     }
-    
+
     return numero;
 }
 
@@ -91,11 +91,11 @@ const createTests = async (path) => {
         objetivos.map((o) => {
 
             let data = {
-                location : o.location,
-                detail : o.detail
+                location: o.location,
+                detail: o.detail
             }
 
-            target && o.detail === 'idRelative' ? target = data : o.detail === 'attributes'  ? target = data : o.detail === 'position' ? target = data : o.detail === 'innerText' ? target = data : target = data
+            target && o.detail === 'idRelative' ? target = data : o.detail === 'attributes' ? target = data : o.detail === 'position' ? target = data : o.detail === 'innerText' ? target = data : target = data
         })
 
         e["target"] = target
@@ -108,13 +108,13 @@ const createTests = async (path) => {
     let indice = 0
 
     file.commands = file.commands.map((e) => {
-        
+
         let testToDo = e.comment !== '' ? true : false
         let validador = false
         let mensajesEsperados = []
-        
+
         //Forma de documentar los detalles
-        
+
         //tipoDeDato:string
         //obligatorio:si
         //longitud:10 o indefinida
@@ -130,31 +130,31 @@ const createTests = async (path) => {
             let separateComments = e.comment.split('-')
 
             testNumero = e.comment.includes('numero')
-            
+
             testObligatorio = e.comment.includes('obligatorio')
 
             testLongitud = !e.comment.includes('longitud:indefinida')
-            
+
             validador = e.comment.includes('validador')
 
             let foundMessages = e.comment.includes('mensajesEsperados:')
 
             testLongitud && separateComments.map((c) => {
-                
+
                 if (c.includes('longitud:')) {
-                    
+
                     //Si se encuentra longitud la establece
                     longitud = parseInt(c.split(':')[1])
-                
+
                 }
             })
 
             foundMessages && separateComments.map((c) => {
                 if (c.includes('mensajesEsperados:')) {
-                    
+
                     //Si se encuentran mensajes los establecemos
                     mensajesEsperados = c.split(':')[1].split('|')
-                
+
                 }
             })
 
@@ -169,7 +169,7 @@ const createTests = async (path) => {
         e["testObligatorio"] = testObligatorio
         e["testNumero"] = testNumero
         e["longitud"] = e.command === 'type' && longitud
-        
+
         testToDo && testsToDo.push(e)
 
         indice += 1
@@ -187,7 +187,7 @@ const createTests = async (path) => {
 
         if (t.testLongitud) {
 
-            const longitudRoutine = copyArray.map(a=> a.indice === indice ? {
+            const longitudRoutine = copyArray.map(a => a.indice === indice ? {
                 ...a,
                 value: generarNumeroAleatorio(t.longitud)
             } : a)
@@ -203,11 +203,11 @@ const createTests = async (path) => {
 
         if (t.testNumero) {
 
-            const numeroRutina = copyArray.map(a=> a.indice === indice ? {
+            const numeroRutina = copyArray.map(a => a.indice === indice ? {
                 ...a,
-                value: generarPalabraAleatoria(t.longitud+1)
+                value: generarPalabraAleatoria(t.longitud + 1)
             } : a)
-            
+
             file.tests.push({
                 indice,
                 mensajesEsperados,
@@ -218,7 +218,7 @@ const createTests = async (path) => {
 
         if (t.testObligatorio) {
 
-            const obligatorioRutina = copyArray.map(a=> a.indice === indice ? {
+            const obligatorioRutina = copyArray.map(a => a.indice === indice ? {
                 ...a,
                 value: ''
             } : a)
@@ -235,8 +235,8 @@ const createTests = async (path) => {
     })
 
     let finalObject = {
-        targetURL : file.url,
-        rutinaNormal : file.commands,
+        targetURL: file.url,
+        rutinaNormal: file.commands,
         tests: file.tests
     }
 

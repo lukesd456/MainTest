@@ -22,8 +22,12 @@ const generarPalabraAleatoria = (longitud) => {
     return palabra;
 }
 
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
 
 module.exports = {
     generarNumeroAleatorio,
-    generarPalabraAleatoria
+    generarPalabraAleatoria,
+    getRandomNumber
 }

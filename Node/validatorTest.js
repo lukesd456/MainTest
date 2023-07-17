@@ -9,6 +9,7 @@ const { writeJson } = require('./jsonWriter.js')
 config()
 
 const path = '../SideFiles/testAcopio2.side'
+const resultPath = '../Results/validatorTests.json'
 
 const createValidatorTests = async (path) => {
 
@@ -53,11 +54,9 @@ const createValidatorTests = async (path) => {
 
     })
 
-    const path = '../Results/validatorTests.json'
 
-    writeJson(new ValidatorTestJSON('Test de validaciones', tests, data.targetURL), path)
 
-    // console.log(data.targetURL)
+    writeJson(new ValidatorTestJSON('Test de validaciones', tests, data.targetURL), resultPath)
 
 }
 

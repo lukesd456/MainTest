@@ -1,6 +1,6 @@
 const { filterSIDE } = require('../schemas/sideSchema.js')
 
-const {config} = require('dotenv')
+const { config } = require('dotenv')
 const { generarNumeroAleatorio, generarPalabraAleatoria } = require('../utils/functions.js')
 const { writeJson } = require('./jsonWriter.js')
 const { clonateTestJson } = require('../schemas/validatorSchemas.js')
@@ -8,17 +8,25 @@ config()
 
 const path = '../SideFiles/testAcopio2.side'
 
+const filterAleatory = (commands) => {
+    let dataCommands = commands
+
+    dataCommands = dataCommands.map((e) => {
+        
+    })
+}
+
 const createMultipleTests = async (path, numeroTests) => {
     const data = await filterSIDE(path)
 
     let tests = Array(numeroTests)
 
-    
+
     for (let i = 0; i < tests.length; i++) {
         tests[i] = undefined;
     }
 
-    
+
     tests = tests.map((t) => {
         return {
             ...data,
@@ -40,7 +48,7 @@ const createMultipleTests = async (path, numeroTests) => {
                         }
                     }
 
-                } else return {...e}
+                } else return { ...e }
 
             })
         }
@@ -48,7 +56,7 @@ const createMultipleTests = async (path, numeroTests) => {
 
     const path2 = '../Results/clonateTests.json'
 
-    writeJson(new clonateTestJson('clonar tests',tests, data.targetURL, numeroTests), path2)
+    writeJson(new clonateTestJson('clonar tests', tests, data.targetURL, numeroTests), path2)
 
 }
 
