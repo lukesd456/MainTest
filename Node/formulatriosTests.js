@@ -4,6 +4,23 @@ const { writeJson } = require("./jsonWriter");
 
 const mainRoutine = '../SideFiles/testprincipal.side'
 
+const usuario = 'qa_user'
+const contraseña = 'agROS_2023'
+
+const filterValues = (longitud, tipoDeDato, comando, valorDefault) => {
+    let value
+
+    if ( valorDefault !== usuario && valorDefault !== contraseña ) {
+        if (tipoDeDato === 'string') {
+            value = comando === 'type' && generarPalabraAleatoria(longitud)
+        } else {
+            value = comando === 'type' && generarNumeroAleatorio(longitud)
+        }
+    } else return valorDefault
+
+    return value
+}
+
 let modulesRoutes = [
     'formularios_altitud.side',
     'formularios_audio.side',
@@ -53,7 +70,7 @@ const createTestsFormularios = async (numeroDeModulos, numeroDeOpciones) => {
     for (let i = 0; i < numeroDeModulos; i++) {
         const indice = getRandomNumber(0,dataModules.length)
 
-        const accionModule = dataModules[indice]
+        let accionModule = dataModules[indice]
 
         accionModule.map(e=>mainAction.commands.push(e))
     }
@@ -61,20 +78,8 @@ const createTestsFormularios = async (numeroDeModulos, numeroDeOpciones) => {
     //Agregar opciones a test de Opciones Unicas y multiples
 
     for (let i = 0; i < numeroDeOpciones; i++) {
-        const dataOpcion = dataAgregarOpcion.commands.map((e) => {
-            
-            let value
-
-            if (e.tipoDeDato === 'string') {
-                value = generarPalabraAleatoria(e.longitud)
-            } else {
-                value = generarNumeroAleatorio(e.longitud)
-            }
-
-            return {
-                ...e, value
-            }
-        })
+        
+        const dataOpcion = dataAgregarOpcion.commands
 
         dataOpcion.map(e => dataOpcionesMultiples.commands.push(e))
         dataOpcion.map(e => dataOpcionUnica.commands.push(e))
@@ -97,6 +102,18 @@ const createTestsFormularios = async (numeroDeModulos, numeroDeOpciones) => {
 
     dataGuardarFormulario.commands.map(e => mainAction.commands.push(e))
 
+    //cambiamos el valor de todos los inputs
+
+    mainAction.commands = mainAction.commands.map((e) => {
+        
+        const longitud = e.longitud ? e.longitud : 40
+        
+        return {
+            ...e,
+            value: filterValues(longitud, e.tipoDeDato, e.command, e.value)
+        }
+    })
+
     //Actualizamos los indices
 
     mainAction.commands = mainAction.commands.map((e) => {
@@ -108,11 +125,11 @@ const createTestsFormularios = async (numeroDeModulos, numeroDeOpciones) => {
 
     //Exportamos el JSON
 
-    console.log(mainAction)
+    // console.log(mainAction)
 
     writeJson(mainAction, '../Results/formularios.json')
 
 
 }
 
-createTestsFormularios(500,500)
+createTestsFormularios(5000,5000)
